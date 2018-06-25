@@ -67,6 +67,7 @@ var CommentView = Backbone.View.extend({
      * For now, we won't worry about that. */
   }
 });
+
 /* Now that we have a model, let's imagine what would happen were we to have
  * many, many comments: we would put them in a collection: */
 var Comments = Backbone.Collection.extend({
@@ -111,6 +112,18 @@ var CommentsView = Backbone.View.extend({
      * Remember, we have the underscore functions: */
     this.$el.find('ul').append(this.collection.map(function(comment) {
       // YOUR CODE HERE
+      var html = [
+        '<li>',
+          '<span class="votes">',
+            comment.get('votes'),
+          '</span>',
+          '<span class="comment">',
+            comment.get('message'),
+          '</span>',
+          '</br>',
+        '</li>'
+      ].join('');
+      return html;
     }));
 
     return this.$el;
@@ -134,7 +147,7 @@ var comments = new Comments(commentList);
 var commentsView = new CommentsView({ collection: comments });
 
 // Append it to the page (uncomment this when you are ready):
-// $('body').append(commentsView.render());
+$('body').append(commentsView.render());
     </script>
   </body>
 </html>
